@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Direct Deposit Web Component</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <div id="app">
+    <direct-deposit-element></direct-deposit-element>
+  </div>
+  
+  <script>
+    // Example of listening to events from the web component
+    document.addEventListener('depositStateChanged', function(event) {
+      console.log('Deposit state changed:', event.detail);
+    });
+    
+    document.addEventListener('tokenRefreshRequired', function(event) {
+      console.log('Token refresh required:', event.detail);
+      // Simulate providing a new token
+      setTimeout(() => {
+        const element = document.querySelector('direct-deposit-element');
+        if (element) {
+          element.updateToken('new-token-' + Date.now());
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html> 
